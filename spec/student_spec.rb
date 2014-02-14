@@ -36,12 +36,6 @@ describe "Student" do
     expect(s.summary).to eq("summary summary")
   end
 
-  it 'converts attributes to a hash' do
-    s = Student.new
-    s.name = "Some Dude"
-
-    expect(m.to_h).to eq({:name => "Some Dude"})
-  end
   
   it 'should save itself or persist to a database' do
     s = Student.new

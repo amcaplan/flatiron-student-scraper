@@ -1,53 +1,47 @@
 require_relative 'spec_helper'
 
+
 describe "Student" do
+
+  let(:our_student) {{
+        :name => "Justin Belmont",
+     :img_url => "http://students.flatironschool.com/img/students/justinbelmont_profile.jpg",
+    :subtitle => "Woooohooo! Code.",
+     :summary => "Native New Yorker. Code Warrior",
+    :blog_url => "http://students.flatironschool.com/students/justinbelmont.html"
+  }}
+
+  let(:s) {Student.new(our_student)}
+
   before(:each) do
-    DB.execute("CREATE TABLE students (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, image_url TEXT, subtitle TEXT, summary TEXT)")
+    DB.execute("CREATE TABLE students (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, img_url TEXT, subtitle TEXT, summary TEXT)")
   end
   after(:each) do
     DB.execute("DROP TABLE students")
   end
 
   it 'has a name' do
-    s = Student.new
-    s.name = "Some Dude"
-
-    expect(s.name).to eq("Some Dude")
+    expect(s.name).to eq("Justin Belmont")
   end
 
-  it 'has a image_url' do
-    s = Student.new
-    s.image_url = "/awesomedude.jpg/"
-
-    expect(s.image_url).to eq("/awesomedude.jpg/")
+  it 'has a img_url' do
+    expect(s.img_url).to eq("http://students.flatironschool.com/img/students/justinbelmont_profile.jpg")
   end
 
   it 'has a subtitle' do
-    s = Student.new
-    s.subtitle = "something somthing"
-
-    expect(s.subtitle).to eq("something somthing")
+    expect(s.subtitle).to eq("Woooohooo! Code.")
   end
 
   it 'has a summary' do
-    s = Student.new
-    s.summary = "summary summary"
-
-    expect(s.summary).to eq("summary summary")
+    expect(s.summary).to eq("Native New Yorker. Code Warrior")
   end
-
   
   it 'should save itself or persist to a database' do
-    s = Student.new
-    s.name = "Some Dude"
-
     s.save
 
- 
-
-    results = DB.execute("SELECT name FROM students WHERE name = 'Some Dude'")
+    results = DB.execute("SELECT name FROM students WHERE name = 'Justin Belmont'")
     
-    expect(results[0][0]).to eq("Some Dude")    
+    expect(results[0][0]).to eq("Justin Belmont")    
   end
 end
 

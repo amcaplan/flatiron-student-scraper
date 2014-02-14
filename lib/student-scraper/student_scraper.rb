@@ -30,6 +30,7 @@ class StudentScraper
     
 end
 
-Student.create_table
-students = StudentScraper.get_students
-students.each{|student| Student.new(student).save}
+#Student.create_table
+#students = StudentScraper.get_students
+#students.each{|student| Student.new(student).save}
+#ap students[0]

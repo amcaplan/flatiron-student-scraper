@@ -1,8 +1,8 @@
 require_relative 'spec_helper'
 
-describe "Movie" do
+describe "Student" do
   before(:each) do
-    DB.execute("CREATE TABLE students (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)")
+    DB.execute("CREATE TABLE students (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, image_url TEXT, subtitle TEXT, summary TEXT)")
   end
   after(:each) do
     DB.execute("DROP TABLE students")
@@ -10,9 +10,9 @@ describe "Movie" do
 
   it 'has a name' do
     s = Student.new
-    s.name = "Awesome Dude"
+    s.name = "Some Dude"
 
-    expect(s.name).to eq("Awesome Dude")
+    expect(s.name).to eq("Some Dude")
   end
 
   it 'has a image_url' do
@@ -38,22 +38,22 @@ describe "Movie" do
 
   it 'converts attributes to a hash' do
     s = Student.new
-    s.name = "Awesome Dude"
+    s.name = "Some Dude"
 
-    expect(m.to_h).to eq({:name => "Awesome Dude"})
+    expect(m.to_h).to eq({:name => "Some Dude"})
   end
   
   it 'should save itself or persist to a database' do
     s = Student.new
-    s.name = "Awesome Dude"
+    s.name = "Some Dude"
 
     s.save
 
  
 
-    results = DB.execute("SELECT name FROM students WHERE name = 'Awesome Dude'")
+    results = DB.execute("SELECT name FROM students WHERE name = 'Some Dude'")
     
-    expect(results[0][0]).to eq("Awesome Dude")    
+    expect(results[0][0]).to eq("Some Dude")    
   end
 end
 

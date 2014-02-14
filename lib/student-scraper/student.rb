@@ -1,6 +1,7 @@
 class Student
   attr_reader :name, :img_url, :subtitle, :summary, :blog_url
-  
+  DB = SQLite3::Database.new("students.db")
+
   def initialize(student)
     @name = student[:name]
     @img_url = student[:img_url]
@@ -14,7 +15,7 @@ class Student
       "CREATE TABLE students(
           id INTEGER PRIMARY KEY,
           name VARCHAR NOT NULL,
-          img_url VARCHAR,
+          img_url TEXT,
           subtitle VARCHAR,
           summary TEXT,
           blog_url VARCHAR
@@ -24,7 +25,7 @@ class Student
   
   def save
     DB.execute(
-      "INSERT INTO students values(?,?,?,?,?,?)", 
+      "INSERT INTO students (name, img_url, subtitle, summary, blog_url) values(?,?,?,?,?)", 
       self.name, self.img_url, self.subtitle, self.summary, self.blog_url
     )
   end
